@@ -30,15 +30,52 @@ paddle_b.penup()
 paddle_b.goto(350, 0)
 
 # Ball
-
 ball = turtle.Turtle()
 ball.speed(0)
 ball.shape("square")
 ball.color("#2E8BC0")
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 0.1
+ball.dy = 0.1
+
+# Function
+def paddle_a_up():
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+def paddle_b_up():
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+def paddle_b_down():
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
+
+# Keyboard binding
+window.listen()
+window.onkeypress(paddle_a_up, "w")
+window.onkeypress(paddle_a_down, "s")
+window.onkeypress(paddle_b_up, "Up")
+window.onkeypress(paddle_b_down, "Down")
+
 
 # Main game loop
 
 while True:
     window.update()
+
+    # Move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    # Border checking
